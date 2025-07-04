@@ -1,0 +1,29 @@
+[
+  {
+    "Id": "d37c877e-3ef2-4aa2-a237-8be4f4725731",
+    "Name": "Administrator",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  },
+  {
+    "Id": "333e8827-5673-49fd-a7d7-775571dfbabc",
+    "Name": "Management",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  },
+  {
+    "Id": "9838ec29-da1f-4911-a417-c25b758f5ce1",
+    "Name": "Auditor",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  }
+]

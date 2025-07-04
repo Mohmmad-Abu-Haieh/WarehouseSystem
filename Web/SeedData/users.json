@@ -1,0 +1,15 @@
+﻿[
+  {
+    "Id": "fd02cef4-d6af-429b-92b4-8c95ca0bb07e",
+    "FullName": "System",
+    "Email": "admin@gmail.com",
+    "Mobile": "0780052253",
+    "RoleId": "d37c877e-3ef2-4aa2-a237-8be4f4725731",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  }
+]
+
