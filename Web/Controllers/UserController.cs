@@ -1,6 +1,7 @@
 ﻿using Domain.Interface;
 using DTO;
 using Entity.WorkContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
+    [ApiController]
+    [Authorize]
     [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
     {
@@ -23,7 +26,7 @@ namespace Web.Controllers
             _sessionProvider = sessionProvider;
         }
         // POST: api/User
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> CreateAccount([FromBody] UserForm form)
         {
             var result = await _userService.CreateAccount(form, _sessionProvider.CurrentUser.FullName);
@@ -50,15 +53,22 @@ namespace Web.Controllers
             var user = await _userService.GetUserByUsername(username);
             return user == null ? NotFound() : Ok(user);
         }
+        // GET: api/User/username/{username}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserDetails(Guid id)
+        {
+            var user = await _userService.GetUserDetails(id);
+            return user == null ? NotFound() : Ok(user);
+        }
         // POST: api/User/filter
-        [HttpPost("filter")]
+        [HttpPost]
         public async Task<IActionResult> GetUsersDataTable([FromBody] UserFilter filter)
         {
             var result = await _userService.GetUsersDataTable(filter);
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             try
@@ -69,6 +79,13 @@ namespace Web.Controllers
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsersFormData()
+        {
+            var data = await _userService.GetUsersFormData();
+            return Ok(data);
         }
     }
 }

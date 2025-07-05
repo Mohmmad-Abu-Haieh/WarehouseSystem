@@ -15,8 +15,10 @@ namespace Domain.Interface
         Task<ServiceOperationResult<UserForm>> UpdateAccount(UserForm form);
         Task<UserForm> GetUserByUsername(string username);
         Task<User> GetUserById(Guid id);
-        Task<DataTable<UserForm>> GetUsersDataTable(UserFilter filter);
+        Task<DataTable<UserList>> GetUsersDataTable(UserFilter filter);
         Task<ServiceOperationResult> DeleteUser(Guid id);
+        Task<ServiceOperationResult<UserForm>> GetUserDetails(Guid Id);
+        Task<UserFormData> GetUsersFormData();
     }
 }
 

@@ -54,6 +54,7 @@ namespace Web.Controllers
                     accessToken = tokenString,
                     expiresIn = tokenDescriptor.Expires,
                     userInfo = user,
+
                 };
                 return Ok(responseJson);
             }
