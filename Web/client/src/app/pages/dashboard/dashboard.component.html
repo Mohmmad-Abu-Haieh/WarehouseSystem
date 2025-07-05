@@ -4,8 +4,74 @@
     </div>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container py-4">
+  <h2 class="mb-4">Warehouse Inventory Overview</h2>
+
+  <!-- الرسم البياني -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div style="max-width: 700px; margin: auto;">
+        <canvas baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [type]="barChartType"
+          height="300">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- أعلى وأقل 10 عناصر -->
   <div class="row">
-    <div class="col-12">
-<h6><strong>Dashboard</strong></h6>
+    <!-- أعلى -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          Top 10 High Quantity Items
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped m-0">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of this.dashboardService.topHighItems">
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- أقل -->
+    <div class="col-md-6 mt-4 mt-md-0">
+      <div class="card">
+        <div class="card-header bg-danger text-white">
+          Top 10 Low Quantity Items
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped m-0">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of this.dashboardService.topLowItems">
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

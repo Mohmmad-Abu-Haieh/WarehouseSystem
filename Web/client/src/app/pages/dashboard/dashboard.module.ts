@@ -1,10 +1,11 @@
 // This module is no longer needed. Please delete this file.
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardService } from './dashboard.service';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -13,10 +14,11 @@ import { DashboardService } from './dashboard.service';
     CommonModule,
     FormsModule,
     DashboardRoutingModule,
+    NgChartsModule 
   ],
   declarations: [
     DashboardComponent,
   ],
-  providers: [DashboardService]
+  providers: [DashboardService,DatePipe ]
 })
 export class DashboardModule { }
