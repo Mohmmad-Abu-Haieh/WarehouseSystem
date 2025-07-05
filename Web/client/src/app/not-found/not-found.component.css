@@ -1,0 +1,11 @@
+.not-found-container h1 {
+  font-size: 6rem;
+  color: #dc3545;
+}
+.not-found-container h2 {
+  font-size: 2rem;
+  color: #333;
+}
+.not-found-container p {
+  color: #666;
+}
