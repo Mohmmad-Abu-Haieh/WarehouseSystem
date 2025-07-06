@@ -56,6 +56,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IItemService, ItemsService>();
+builder.Services.AddScoped<ILogsService, LogsService>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

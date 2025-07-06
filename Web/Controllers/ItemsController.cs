@@ -1,8 +1,7 @@
 ﻿using Domain.DTO.Warehous;
 using Domain.Interface;
-using Domain.Service;
-using DTO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,12 +12,12 @@ namespace Web.Controllers
     [ApiController]
     [Authorize]
     [Route("api/[controller]/[action]")]
-    public class WarehouseController : Controller
+    public class ItemsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IWarehouseService _warehouseService;
 
-        public WarehouseController(IConfiguration configuration, IWarehouseService warehouseService)
+        public ItemsController(IConfiguration configuration, IWarehouseService warehouseService)
         {
             _configuration = configuration;
             _warehouseService = warehouseService;
@@ -90,3 +89,4 @@ namespace Web.Controllers
         }
     }
 }
+

@@ -21,6 +21,14 @@ const pageRoutes: Routes = [
         path: 'warehouse',
         loadChildren: () => import('./warehouse/warehouse.module').then(m => m.WarehouseModule)
       },
+      {
+        path: 'items',
+        loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)
+      },
+      {
+        path: 'logs',
+        loadChildren: () => import('./logs/logs.module').then(m => m.LogsModule)
+      },
       { path: 'home', component: HomeComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]

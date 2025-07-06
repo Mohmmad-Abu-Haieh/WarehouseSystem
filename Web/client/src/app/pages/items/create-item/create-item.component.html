@@ -1,0 +1,58 @@
+        
+<div class="px-4 py-3">
+<form #createItemForm="ngForm" (ngSubmit)="onSubmitItem(createItemForm)">
+  <div class="dialog-content px-4 py-3">
+
+    <div class="mb-3">
+      <label>Full Name</label>
+      <input type="text"
+             class="form-control"
+             name="fullName"
+             [(ngModel)]="model.fullName"
+             required />
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email"
+             class="form-control"
+             name="email"
+             [(ngModel)]="model.email"
+             required />
+    </div>
+
+    <div class="mb-3">
+      <label>Mobile</label>
+      <input type="text"
+             class="form-control"
+             name="mobile"
+             [(ngModel)]="model.mobile" />
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password"
+             class="form-control"
+             name="password"
+             [(ngModel)]="model.password"
+             required />
+    </div>
+<div class="mb-3">
+  <label for="role" class="form-label">Role</label>
+  <select class="form-select"
+          id="role"
+          name="roleId"
+          [(ngModel)]="model.roleId"
+          required>
+    <option value="" disabled selected>Select Role</option>
+    <option *ngFor="let role of roles" [value]="role.id">
+      {{ role.text }}
+    </option>
+  </select>
+</div>
+<div class="d-grid mb-2">
+      <button type="submit" class="btn btn-primary" [disabled]="createItemForm.invalid">Create</button>
+</div>
+ </div>
+</form>
+</div>
