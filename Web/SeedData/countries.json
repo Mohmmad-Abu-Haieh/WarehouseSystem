@@ -1,0 +1,47 @@
+[
+  {
+    "Id": "0f95c5a0-c6ba-437c-9563-308c50819131",
+    "Name": "Jordan",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  },
+  {
+    "Id": "dbd88bc8-3fbc-4060-90e9-be3f62451b96",
+    "Name": "Qatar",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  },
+  {
+    "Id": "6df7bb88-fde7-447b-84dd-555bc50a02f9",
+    "Name": "UAE",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  },
+  {
+    "Id": "25764b97-a1df-4c3d-af71-2dbc1f5d6072",
+    "Name": "KSA",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  },
+  {
+    "Id": "bcead305-b62e-42a1-b6ef-1c07dc2c2d54",
+    "Name": "USA",
+    "CreatedBy": "Seed",
+    "CreatedOn": "2025-07-03T00:00:00Z",
+    "ModifiedBy": null,
+    "ModifiedOn": null,
+    "Active": 1
+  }
+]

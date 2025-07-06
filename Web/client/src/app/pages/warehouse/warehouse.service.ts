@@ -6,9 +6,9 @@ import { HttpClient } from '@angular/common/http';
 export class WarehouseService {
 constructor(public http: HttpClient) {
 }
-GetAllUsers(model: any) {
+GetAllWarehouses(model: any) {
   return new Promise((resolve, reject) => {
-    this.http.post('http://localhost:5017/api/User/GetUsersDataTable', model)
+    this.http.post('Warehouse/GetWarehouseDataTable', model)
       .subscribe({
         next: (response: any) => {
           const user = response;
@@ -24,14 +24,14 @@ GetAllUsers(model: any) {
       });
   });
 }
-CreateUser(model: any) {
+CreateWarehouse(model: any) {
   debugger;
   return new Promise((resolve, reject) => {
-    this.http.post('http://localhost:5017/api/User/CreateAccount', model)
+    this.http.post('Warehouse/CreateWarehous', model)
       .subscribe({
         next: (response: any) => {
-          const user = response;
-          if (user) {
+         // const warehouse = response;
+          if (response.isSuccessfull) {
             resolve(true);
           } else {
             resolve(false);
@@ -43,10 +43,30 @@ CreateUser(model: any) {
       });
   });
 }
-GetUserDetails(id: any) {
+
+UpdateWarehouse(model: any) {
   debugger;
   return new Promise((resolve, reject) => {
-    this.http.get('http://localhost:5017/api/User/GetUserDetails/' + id)
+    this.http.put('Warehouse/UpdateWarehouse', model)
+      .subscribe({
+        next: (response: any) => {
+         // const warehouse = response;
+          if (response.isSuccessfull) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        error: () => {
+          resolve(false);
+        }
+      });
+  });
+}
+GetWarehouseDetails(id: any) {
+  debugger;
+  return new Promise((resolve, reject) => {
+    this.http.get('Warehouse/GetWarehouseDetails/' + id)
       .subscribe({
         next: (response: any) => {
           const user = response.result;
@@ -62,13 +82,13 @@ GetUserDetails(id: any) {
       });
   });
 }
-GetUsersFormData() {
+GetWarehousesFormData() {
   debugger;
   return new Promise((resolve, reject) => {
-    this.http.get('http://localhost:5017/api/User/GetUsersFormData')
+    this.http.get('Warehouse/GetWarehouseFormData')
       .subscribe({
         next: (response: any) => {
-          const data = response.roles;
+          const data = response.countries;
           if (data) {
             resolve(data);
           } else {
@@ -81,10 +101,10 @@ GetUsersFormData() {
       });
   });
 }
-RemoveUser(id: any) {
+RemoveWarehouse(id: any) {
   debugger;
   return new Promise((resolve, reject) => {
-    this.http.delete('http://localhost:5017/api/User/DeleteUser/' + id)
+    this.http.delete('Warehouse/DeleteWarehouse/' + id)
       .subscribe({
         next: (response: any) => {
           const user = response.result;

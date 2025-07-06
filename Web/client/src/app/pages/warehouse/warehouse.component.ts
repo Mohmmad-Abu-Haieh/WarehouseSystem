@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { WarehouseService } from './warehouse.service';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
 declare var $: any;
-
+// this.router.navigate([link, params['id']]);
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
@@ -25,19 +25,19 @@ dataOfTable = {
     public warehouseService: WarehouseService,public dialog: MatDialog) {
   }
   ngOnInit(): void {
-  this.loadUsers();  
+  this.loadWarehouses();  
   }
   onSearch() {
   this.dataOfTable.PageIndex = 0;
-  this.loadUsers();
+  this.loadWarehouses();
 }
-loadUsers() {
+loadWarehouses() {
 const filter = {
       keyword: this.dataOfTable.keyword,
       pageIndex: this.dataOfTable.PageIndex,
       pageSize: this.dataOfTable.PageSize
     };
-  this.warehouseService.GetAllUsers(filter).then((response: any) => {
+  this.warehouseService.GetAllWarehouses(filter).then((response: any) => {
     debugger;
     this.dataOfTable.Data = response.data;
     this.dataOfTable.DataCount = response.count;
@@ -50,9 +50,9 @@ const filter = {
 changePage(newPageIndex: number) {
     if (newPageIndex < 0 || newPageIndex >= this.pagesArray.length) return;
     this.dataOfTable.PageIndex = newPageIndex;
-    this.loadUsers();
+    this.loadWarehouses();
   }
-onOpenCreateUserModal() {
+onOpenCreateWarehouseModal() {
     let dialogRef: MatDialogRef<any> = this.dialog.open(CreateWarehouseComponent, {
         disableClose: false,
         width: '80vw',
@@ -60,24 +60,27 @@ onOpenCreateUserModal() {
         data: {}
     });
 }
-onEditUser(user: any) {
+onEditWarehouse(warehouse: any) {
   let dialogRef: MatDialogRef<any> = this.dialog.open(CreateWarehouseComponent, {
       disableClose: false,
       width: '80vw',
       height: '80vh',
-      data: { rowId: user.id }
+      data: { rowId: warehouse.id }
   });
 }
-onDeleteUser(user: any) {
-  if (confirm(`Are you sure you want to delete user ${user.fullName}?`)) {
-    this.warehouseService.RemoveUser(user.id).then((res: any) => {
+onDeleteWarehouse(warehouse: any) {
+  if (confirm(`Are you sure you want to delete warehouse ${warehouse.name}?`)) {
+    this.warehouseService.RemoveWarehouse(warehouse.id).then((res: any) => {
       debugger;
-      console.log('User deleted successfully:', res);
+      console.log('Warehouse deleted successfully:', res);
     }).catch((err) => {
-      console.error('Failed to delete user', err);
+      console.error('Failed to delete warehouse', err);
     });
-    console.log('Delete user:', user);
+    console.log('Delete warehouse:', warehouse);
   }
+}
+onDeleteWarehouseItems(warehouse: any) {
+    console.log('Delete warehouse items:', warehouse);
 }
 ngOnDestroy(): void {
 }

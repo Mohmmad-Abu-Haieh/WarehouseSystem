@@ -6,9 +6,9 @@
 </div>
 <div class="container mt-3">
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="mb-0">Users List</h4>
-    <button type="button" class="btn btn-success" (click)="onOpenCreateUserModal()">
-      Create User
+    <h4 class="mb-0">Warehouse List</h4>
+    <button type="button" class="btn btn-success" (click)="onOpenCreateWarehouseModal()">
+      Create Warehouse
     </button>
 </div>
 <div class="input-group mb-3">
@@ -23,28 +23,31 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Mobile</th>
-        <th>Role</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Country</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of dataOfTable.Data; let i = index">
+      <tr *ngFor="let warehouse of dataOfTable.Data; let i = index">
         <td>{{ i + 1 + (dataOfTable.PageIndex * dataOfTable.PageSize) }}</td>
-        <td>{{ user.fullName }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.mobile }}</td>
-        <td>{{ user.roleName }}</td>
+        <td>{{ warehouse.name }}</td>
+        <td>{{ warehouse.address }}</td>
+        <td>{{ warehouse.city }}</td>
+        <td>{{ warehouse.country }}</td>
         <td>
-        <button class="btn btn-sm btn-warning me-1" (click)="onEditUser(user)">
+        <button class="btn btn-sm btn-warning me-1" (click)="onEditWarehouse(warehouse)">
           <i class="fa fa-edit"></i> Edit
         </button>
-        <button class="btn btn-sm btn-danger" (click)="onDeleteUser(user)">
+        <button class="btn btn-sm btn-danger me-1" (click)="onDeleteWarehouse(warehouse)">
           <i class="fa fa-trash"></i> Delete
         </button>
-      </td>
+        <button class="btn btn-sm btn-danger" (click)="onDeleteWarehouseItems(warehouse)">
+          <i class="fa fa-trash"></i> Items
+        </button>
+       </td>
       </tr>
       <tr *ngIf="dataOfTable.Data.length === 0">
         <td colspan="5" class="text-center">No data found</td>

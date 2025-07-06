@@ -10,64 +10,89 @@ import { WarehouseService } from '../warehouse.service';
   styleUrls: ['./create-warehouse.component.css']
 })
 export class CreateWarehouseComponent implements OnInit, OnDestroy {
-  roles : any[] = [];
-  userId: any;
+  countries : any[] = [];
+  warehouseId: any;
   public model: any = {
         id: null,
-        fullName: '',
-        email: '',
-        mobile: '',
-        password: '',
-        roleId: null
+        name: '',
+        address: '',
+        city: '',
+        countryId: null
     };
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CreateWarehouseComponent>, 
     public warehouseService: WarehouseService
     ) {
-          this.userId = data.rowId;
-          this.warehouseService.GetUsersFormData().then((res: any) => {
+          this.warehouseId = data.rowId;
+          this.warehouseService.GetWarehousesFormData().then((res: any) => {
             debugger;
-            this.roles = res;
+            this.countries = res;
           }).catch((err : any) => {
             console.error('Failed to load form data', err);
           });
       }
   ngOnInit(): void {
-    if (this.userId) {
-      this.loadUserForEdit(this.userId);  
+   if (this.warehouseId) {
+      this.loadWarehouseForEdit(this.warehouseId);  
     }
   }
-  onCreateUser(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-    this.warehouseService.CreateUser(this.model).then((success: any) => {
+
+  onSubmitWarehouse(form: NgForm) {
+  if (form.invalid) {
+    return;
+  }
+  const isUpdate = !!this.warehouseId;
+  if (isUpdate) {
+    this.warehouseService.UpdateWarehouse(this.model).then((success: any) => {
       if (success) {
+        alert("Warehouse updated successfully");
       } else {
-        alert("فشل تسجيل الدخول");
-        localStorage.clear();
+        alert("Failed to update warehouse");
       }
     });
-    console.log('User created:', this.model);
-    this.dialogRef.close(this.model);
+  } else {
+    this.warehouseService.CreateWarehouse(this.model).then((success: any) => {
+      if (success) {
+        alert("Warehouse created successfully");
+      } else {
+        alert("Failed to create warehouse");
+      }
+    });
   }
-  loadUserForEdit(userId: number) {
-  this.warehouseService.GetUserDetails(userId).then((res: any) => {
+
+  this.dialogRef.close(this.model); // إغلاق النافذة مع إرجاع النموذج
+}
+
+  // onCreateWarehouse(form: NgForm) {
+  //   if (form.invalid) {
+  //     return;
+  //   }
+  //   this.warehouseService.CreateWarehouse(this.model).then((success: any) => {
+  //     debugger;
+  //     if (success) {
+  //       alert("Successfully created warehouse");
+  //     } else {
+  //       alert("Failed to create warehouse");
+  //     }
+  //   });
+  //   this.dialogRef.close(this.model);
+  // }
+  loadWarehouseForEdit(warehouseId: number) {
+  this.warehouseService.GetWarehouseDetails(warehouseId).then((res: any) => {
     debugger;
     this.model = res;
   }).catch((err : any) => {
-    console.error('Failed to load user', err);
+    console.error('Failed to load warehouse', err);
   });
 }
 ngOnDestroy(): void {
   this.model = {
       id: null,
-      fullName: '',
-      email: '',
-      mobile: '',
-      password: '',
-      roleId: null
+      name: '',
+      address: '',
+      city: '',
+      countryId: null
   };
 }
 }

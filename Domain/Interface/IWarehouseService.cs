@@ -15,6 +15,9 @@ namespace Domain.Interface
         Task<ServiceOperationResult<WarehousForm>> UpdateWarehouse(WarehousForm form);
         Task<WarehousForm> GetWarehouseByCode(string code);
         Task<WarehousForm> GetWarehouseById(Guid id);
-        Task<DataTable<WarehousForm>> GetWarehouseDataTable(WarehouseFilter filter);
+        Task<DataTable<WarehouseList>> GetWarehouseDataTable(WarehouseFilter filter);
+        Task<ServiceOperationResult<WarehousForm>> GetWarehouseDetails(Guid Id);
+        Task<ServiceOperationResult> DeleteWarehouse(Guid id);
+        Task<WarehouseFormData> GetWarehouseFormData();
     }
 }

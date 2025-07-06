@@ -1,57 +1,51 @@
         
 <div class="px-4 py-3">
-<form #createUserForm="ngForm" (ngSubmit)="onCreateUser(createUserForm)">
+<form #createWarehouseForm="ngForm" (ngSubmit)="onSubmitWarehouse(createWarehouseForm)">
   <div class="dialog-content px-4 py-3">
 
     <div class="mb-3">
-      <label>Full Name</label>
+      <label>Name</label>
       <input type="text"
              class="form-control"
-             name="fullName"
-             [(ngModel)]="model.fullName"
+             name="name"
+             [(ngModel)]="model.name"
              required />
     </div>
 
     <div class="mb-3">
-      <label>Email</label>
-      <input type="email"
-             class="form-control"
-             name="email"
-             [(ngModel)]="model.email"
-             required />
-    </div>
-
-    <div class="mb-3">
-      <label>Mobile</label>
+      <label>Address</label>
       <input type="text"
              class="form-control"
-             name="mobile"
-             [(ngModel)]="model.mobile" />
+             name="address"
+             [(ngModel)]="model.address"
+             required />
     </div>
 
     <div class="mb-3">
-      <label>Password</label>
-      <input type="password"
+      <label>City</label>
+      <input type="text"
              class="form-control"
-             name="password"
-             [(ngModel)]="model.password"
-             required />
+             name="city"
+             [(ngModel)]="model.city" />
     </div>
 <div class="mb-3">
-  <label for="role" class="form-label">Role</label>
+  <label for="country" class="form-label">Country</label>
   <select class="form-select"
-          id="role"
-          name="roleId"
-          [(ngModel)]="model.roleId"
+          id="country"
+          name="countryId"
+          [(ngModel)]="model.countryId"
           required>
-    <option value="" disabled selected>Select Role</option>
-    <option *ngFor="let role of roles" [value]="role.id">
-      {{ role.text }}
+    <option value="" disabled selected>Select Country</option>
+    <option *ngFor="let country of countries" [value]="country.id">
+      {{ country.text }}
     </option>
   </select>
 </div>
-<div class="d-grid mb-2">
-      <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Create</button>
+<div *ngIf="!warehouseId" class="d-grid mb-2">
+      <button type="submit" class="btn btn-primary" [disabled]="createWarehouseForm.invalid">Create</button>
+</div>
+<div *ngIf="warehouseId" class="d-grid mb-2">
+      <button type="submit" class="btn btn-primary" [disabled]="createWarehouseForm.invalid">Update</button>
 </div>
  </div>
 </form>

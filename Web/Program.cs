@@ -123,6 +123,9 @@ using (var scope = app.Services.CreateScope())
     {
         SeedRole.Seed(dbContext);
         SeedUser.Seed(dbContext);
+        SeedCountries.Seed(dbContext);
+        SeedWarehouse.Seed(dbContext);
+        SeedItems.Seed(dbContext);
     }
     catch (Exception ex)
     {
