@@ -8,6 +8,7 @@ import { WarehouseComponent } from './warehouse.component';
 import { WarehouseRoutingModule } from './warehouse.routing';
 import { WarehouseService } from './warehouse.service';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
+import { ItemsWarehouseComponent } from './items-warehouse/items-warehouse.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.co
   ],
   declarations: [
     WarehouseComponent,
-    CreateWarehouseComponent
+    CreateWarehouseComponent,
+    ItemsWarehouseComponent
   ],
   providers: [WarehouseService]
 })

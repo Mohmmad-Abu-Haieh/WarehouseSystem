@@ -26,7 +26,7 @@ namespace Entity.SeedData
 
             foreach (var country in seedCountries)
             {
-                var exists = appDbContext.Countries.Any(u => u.Name == country.Name);
+                var exists = appDbContext.Countries.Any(u => u.Id == country.Id);
                 if (exists)
                     continue;
                 country.CreatedBy = "Seed";

@@ -1,4 +1,5 @@
-﻿using Domain.DTO.Warehous;
+﻿using Domain.DTO.Item;
+using Domain.DTO.Warehous;
 using DTO;
 using SharedKernel;
 using System;
@@ -16,6 +17,7 @@ namespace Domain.Interface
         Task<WarehousForm> GetWarehouseByCode(string code);
         Task<WarehousForm> GetWarehouseById(Guid id);
         Task<DataTable<WarehouseList>> GetWarehouseDataTable(WarehouseFilter filter);
+        Task<DataTable<ItemList>> GetWarehouseItemsDataTable(WarehouseFilter filter);
         Task<ServiceOperationResult<WarehousForm>> GetWarehouseDetails(Guid Id);
         Task<ServiceOperationResult> DeleteWarehouse(Guid id);
         Task<WarehouseFormData> GetWarehouseFormData();

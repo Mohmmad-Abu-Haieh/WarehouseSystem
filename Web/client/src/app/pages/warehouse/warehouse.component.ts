@@ -3,8 +3,9 @@ import { AuthService } from '../../_guards/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { WarehouseService } from './warehouse.service';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
+import { Router } from '@angular/router';
 declare var $: any;
-// this.router.navigate([link, params['id']]);
+
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
@@ -21,7 +22,7 @@ dataOfTable = {
     DataCount: 0
   };
   pagesArray: number[] = [];
-  constructor(public authService: AuthService,
+  constructor(public authService: AuthService,private router: Router,
     public warehouseService: WarehouseService,public dialog: MatDialog) {
   }
   ngOnInit(): void {
@@ -81,6 +82,10 @@ onDeleteWarehouse(warehouse: any) {
 }
 onDeleteWarehouseItems(warehouse: any) {
     console.log('Delete warehouse items:', warehouse);
+}
+showItems(id:any){
+  const link = 'pages/warehouse/items-warehouse/';
+  this.router.navigate(['pages/warehouse/items', id]);
 }
 ngOnDestroy(): void {
 }

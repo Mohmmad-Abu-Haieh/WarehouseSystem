@@ -27,7 +27,7 @@ namespace Entity.SeedData
 
             foreach (var role in seedRole)
             {
-                var exists = appDbContext.Roles.Any(u => u.Name == role.Name);
+                var exists = appDbContext.Roles.Any(r => r.Id == role.Id);
                 if (exists)
                     continue; 
                 role.CreatedBy = "Seed";

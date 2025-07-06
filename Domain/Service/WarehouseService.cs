@@ -1,4 +1,5 @@
-﻿using Domain.DTO.Warehous;
+﻿using Domain.DTO.Item;
+using Domain.DTO.Warehous;
 using Domain.Interface;
 using Domain.Repositories;
 using DTO;
@@ -117,6 +118,40 @@ namespace Domain.Service
       
                             }).ToListAsync();
             var result = new DataTable<WarehouseList>
+            {
+                Data = data,
+                Count = count
+            };
+            return result;
+        }
+        public async Task<DataTable<ItemList>> GetWarehouseItemsDataTable(WarehouseFilter param)
+        {
+            bool fiteredByKeyword = !string.IsNullOrEmpty(param.Keyword);
+            var query = _context.WarehouseItems
+                                 .Where(item => item.Active == true && item.WarehouseId == param.Id.Value
+                                        &&
+                                         (fiteredByKeyword ?
+                                         item.ItemName.Contains(param.Keyword)
+
+                                    : true)
+                                    )
+                                  .OrderByDescending(item => item.CreatedOn);
+            int count = await query.CountAsync();
+            var data = await query
+                            .Skip(param.PageIndex * param.PageSize)
+                            .Take(param.PageSize)
+                            .Select(item => new ItemList
+                            {
+                                Id = item.Id,
+                                ItemName = item.ItemName,
+                                CostPrice = item.CostPrice,
+                                MsrpPrice = item.MsrpPrice,
+                                Qty = item.Qty,
+                                SkuCode = item.SkuCode,
+                                Warehouse = item.Warehouse.Name,
+
+                            }).ToListAsync();
+            var result = new DataTable<ItemList>
             {
                 Data = data,
                 Count = count

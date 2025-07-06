@@ -6,10 +6,7 @@
 </div>
 <div class="container mt-3">
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="mb-0">Warehouse List</h4>
-    <button type="button" class="btn btn-success" (click)="onOpenCreateWarehouseModal()">
-      Create Warehouse
-    </button>
+    <h4 class="mb-0">Items List</h4>
 </div>
 <div class="input-group mb-3">
   <input type="text"
@@ -23,31 +20,23 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>Country</th>
-        <th>Actions</th>
+        <th>Item Name</th>
+        <th>Cost Price</th>
+        <th>Msrp Price</th>
+        <th>Qty</th>
+        <th>SkuCode</th>
+        <th>Warehouse</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let warehouse of dataOfTable.Data; let i = index">
+      <tr *ngFor="let item of dataOfTable.Data; let i = index">
         <td>{{ i + 1 + (dataOfTable.PageIndex * dataOfTable.PageSize) }}</td>
-        <td>{{ warehouse.name }}</td>
-        <td>{{ warehouse.address }}</td>
-        <td>{{ warehouse.city }}</td>
-        <td>{{ warehouse.country }}</td>
-        <td>
-        <button class="btn btn-sm btn-warning me-1" (click)="onEditWarehouse(warehouse)">
-          <i class="fa fa-edit"></i> Edit
-        </button>
-        <button class="btn btn-sm btn-danger me-1" (click)="onDeleteWarehouse(warehouse)">
-          <i class="fa fa-trash"></i> Delete
-        </button>
-        <button class="btn btn-sm btn-danger" (click)="showItems(warehouse.id)">
-          <i class="fa fa-trash"></i> Items
-        </button>
-       </td>
+        <td>{{ item.itemName }}</td>
+        <td>{{ item.costPrice }}</td>
+        <td>{{ item.msrpPrice }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.skuCode }}</td>
+        <td>{{ item.warehouse }}</td>
       </tr>
       <tr *ngIf="dataOfTable.Data.length === 0">
         <td colspan="5" class="text-center">No data found</td>

@@ -65,7 +65,12 @@ namespace Web.Controllers
             var result = await _warehouseService.GetWarehouseDataTable(filter);
             return Ok(result);
         }
-
+        [HttpPost]
+        public async Task<IActionResult> GetWarehouseItemsDataTable([FromBody] WarehouseFilter filter)
+        {
+            var result = await _warehouseService.GetWarehouseItemsDataTable(filter);
+            return Ok(result);
+        }
         [HttpGet]
         public async Task<IActionResult> GetWarehouseFormData()
         {

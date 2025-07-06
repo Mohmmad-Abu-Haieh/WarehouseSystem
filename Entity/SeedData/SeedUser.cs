@@ -25,7 +25,7 @@ namespace Entity.SeedData
 
             foreach (var user in seedUsers)
             {
-                var exists = appDbContext.Users.Any(u => u.Email == user.Email);
+                var exists = appDbContext.Users.Any(u => u.Id == user.Id);
                 if (exists)
                     continue;
 

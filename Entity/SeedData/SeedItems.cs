@@ -26,7 +26,7 @@ namespace Entity.SeedData
 
             foreach (var item in seedItems)
             {
-                var exists = appDbContext.WarehouseItems.Any(u => u.ItemName == item.ItemName);
+                var exists = appDbContext.WarehouseItems.Any(u => u.Id == item.Id);
                 if (exists)
                     continue;
                 item.CreatedBy = "Seed";

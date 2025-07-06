@@ -24,6 +24,24 @@ GetAllWarehouses(model: any) {
       });
   });
 }
+GetWarehouseItems(model: any) {
+  return new Promise((resolve, reject) => {
+    this.http.post('Warehouse/GetWarehouseItemsDataTable', model)
+      .subscribe({
+        next: (response: any) => {
+          const items = response;
+          if (items) {
+            resolve(items);
+          } else {
+            resolve(false);
+          }
+        },
+        error: () => {
+          resolve(false);
+        }
+      });
+  });
+}
 CreateWarehouse(model: any) {
   debugger;
   return new Promise((resolve, reject) => {

@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -121,11 +122,21 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
-        SeedRole.Seed(dbContext);
-        SeedUser.Seed(dbContext);
-        SeedCountries.Seed(dbContext);
-        SeedWarehouse.Seed(dbContext);
-        SeedItems.Seed(dbContext);
+        // زرع البيانات فقط إذا كانت الجداول فارغة
+        if (!dbContext.Roles.Any())
+            SeedRole.Seed(dbContext);
+
+        if (!dbContext.Users.Any())
+            SeedUser.Seed(dbContext);
+
+        if (!dbContext.Countries.Any())
+            SeedCountries.Seed(dbContext);
+
+        if (!dbContext.Warehouses.Any())
+            SeedWarehouse.Seed(dbContext);
+
+        if (!dbContext.WarehouseItems.Any())
+            SeedItems.Seed(dbContext);
     }
     catch (Exception ex)
     {
