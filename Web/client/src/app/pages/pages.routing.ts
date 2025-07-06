@@ -29,7 +29,10 @@ const pageRoutes: Routes = [
         path: 'logs',
         loadChildren: () => import('./logs/logs.module').then(m => m.LogsModule)
       },
-      { path: 'home', component: HomeComponent },
+      {
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   }

@@ -4,6 +4,7 @@ using Entity.WorkContext;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -18,17 +19,20 @@ namespace Web.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly SessionProvider _sessionProvider;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IConfiguration configuration, IUserService userService, SessionProvider sessionProvider)
+        public UserController(IConfiguration configuration, IUserService userService, SessionProvider sessionProvider,ILogger<UserController> logger)
         {
             _configuration = configuration;
             _userService = userService;
             _sessionProvider = sessionProvider;
+            _logger = logger;
         }
         // POST: api/User
         [HttpPost]
         public async Task<IActionResult> CreateAccount([FromBody] UserForm form)
         {
+            _logger.LogInformation("CreateAccount");
             var result = await _userService.CreateAccount(form, _sessionProvider.CurrentUser.FullName);
             return Ok(result);
         }

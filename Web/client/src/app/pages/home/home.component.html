@@ -51,7 +51,7 @@
         </div>
       </a>
     </div>
-    <div class="col-md-6 mb-4">
+    <div *ngIf="this.currentUserRole === 'Admin'" class="col-md-6 mb-4">
       <a href="/pages/logs" class="text-decoration-none">
         <div class="card shadow-sm h-100 text-white" style="background: #17a2b8;">
           <div class="card-body text-center">

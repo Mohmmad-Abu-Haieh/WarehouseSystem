@@ -27,6 +27,10 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWarehous([FromBody] WarehousForm form)
         {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.ValidationState);
+
             var result = await _warehouseService.CreateWarehous(form);
             return Ok(result);
         }

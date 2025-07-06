@@ -39,6 +39,7 @@ namespace Web.Controllers
                     Subject = new ClaimsIdentity(new[]
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Role, user.RoleCode.ToString()),
                         new Claim(ClaimTypes.Name, JsonConvert.SerializeObject(user)),
                     }),
                     Expires = DateTime.Now.AddDays(1),

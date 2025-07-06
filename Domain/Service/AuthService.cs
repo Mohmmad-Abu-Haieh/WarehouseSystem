@@ -3,6 +3,7 @@ using DTO;
 using Entity;
 using Entity.Context;
 using Entity.WorkContext;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace Domain.Service
                     FullName = user.FullName,
                     Mobile = user.Mobile,
                     RoleId = user.RoleId,
+                    RoleCode = user.Role.Code.Value
             };
             _sessionProvider.InitialiseCurrentUser(loggedInUser);
 
@@ -64,7 +66,7 @@ namespace Domain.Service
         }
         public async Task<User> GetUserByEmail(string email)
         {
-            var user = _efDbContext.Users.FirstOrDefault(x => x.Email == email);
+            var user = await _efDbContext.Users.Include(r => r.Role).FirstOrDefaultAsync(x => x.Email == email);
 
             if ( user == null)
             {

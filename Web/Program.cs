@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,21 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = builder.Configuration;
 
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.SQLite(
+        sqliteDbPath: Environment.CurrentDirectory + @"/Logs.db", // or path to your DB file
+        tableName: "Logs"
+    ).CreateLogger();
+
+
+builder.Host.UseSerilog();
+
 // Add services to the container.
 builder.Services.AddControllers();
+
+Log.Logger.Error("Test");
 
 // Configure DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>

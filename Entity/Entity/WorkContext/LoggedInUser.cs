@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Entity.Entity;
 
 namespace Entity.WorkContext
 {
@@ -10,5 +9,6 @@ namespace Entity.WorkContext
         public string Email { get; set; }
         public string Mobile { get; set; }
         public Guid? RoleId { get; set; }
+        public RoleEnum RoleCode { get; set; }
     }
 }

@@ -13,6 +13,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './_guards/auth.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientInterceptor, HTTPStatus } from './httpClient.interceptor';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const RxJS_Services = [HttpClientInterceptor, HTTPStatus];
 
@@ -28,7 +31,10 @@ const RxJS_Services = [HttpClientInterceptor, HTTPStatus];
     FormsModule,
     PagesModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     AuthService, 

@@ -416,6 +416,13 @@ namespace SharedKernel
         Allocation = 6
     }
 
+    public enum RoleEnum
+    {
+        Admin = 1,
+        Management = 2,
+        Auditor = 3
+    }
+
     public static class Enums
     {
         public static string GetEnumDescription(System.Enum value)
