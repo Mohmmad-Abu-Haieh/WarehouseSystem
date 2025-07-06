@@ -1,6 +1,5 @@
 <div class="login-wrapper">
   <div class="blur-background"></div>
-
   <div class="container h-100 d-flex align-items-center justify-content-center">
     <div class="card login-card shadow-lg">
       <div class="card-body">
@@ -8,46 +7,35 @@
           <div class="text-center mb-4">
             <img src="assets/image/main-logo.png" class="img-fluid" style="max-height: 80px;" />
           </div>
-
           <div class="mb-3">
             <div class="input-group">
               <span class="input-group-text">
                 <i class="fa fa-user"></i>
               </span>
-              <input type="email"
-                     class="form-control"
-                     name="email"
-                     #email="ngModel"
-                     [(ngModel)]="model.email"
-                     placeholder="Username"
-                     required />
+              <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="model.email"
+                placeholder="Username" required email />
+            </div>
+            <div *ngIf="email.invalid && email.touched" class="text-danger mt-1 ms-1">
+              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['email']">Invalid email format.</div>
             </div>
           </div>
-
           <div class="mb-3">
             <div class="input-group">
               <span class="input-group-text">
                 <i class="fa fa-lock"></i>
               </span>
-              <input type="password"
-                     class="form-control"
-                     name="password"
-                     #password="ngModel"
-                     [(ngModel)]="model.password"
-                     placeholder="Password"
-                     required />
+              <input type="password" class="form-control" name="password" minlength="5" #password="ngModel"
+                [(ngModel)]="model.password" placeholder="Password" required />
+            </div>
+            <div *ngIf="password.invalid && password.touched" class="text-danger mt-1 ms-1">
+              <div *ngIf="password.errors?.['required']">Password is required.</div>
+              <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters.</div>
             </div>
           </div>
-
-            <div class="d-grid mb-3">
+          <div class="d-grid mb-3">
             <input type="submit" class="btn btn-primary" value="Login" />
-            </div>
-
-          <!-- <div class="text-center">
-            <button type="button" class="btn btn-link" (click)="showForgotForm = true">
-              Forgot Password?
-            </button>
-          </div> -->
+          </div>
         </form>
       </div>
     </div>
