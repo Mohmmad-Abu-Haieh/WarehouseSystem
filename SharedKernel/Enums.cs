@@ -34,32 +34,8 @@ namespace SharedKernel
         EmailExists = 11,
         [Description("Mobile exists")]
         MobileExists = 12,
-        [Description("Code field doesn’t exists")]
-        CodeNotExists = 13,
-        [Description("Dispense doesn’t exist")]
-        DispenseNotExist = 14,
-        [Description("Archive dispense doesn’t exist")]
-        ArchiveDispenseNotExist = 15,
         [Description("User is not authorized")]
-        UserNotAuthorized = 16,
-        [Description("Warning")]
-        Warning = 17,
-        [Description("{0}")]
-        InternalServreError = 500,
-        [Description("Incorrect source warehouse")]
-        IncorrectSourceWarehouse = 18,
-        [Description("Serial does not exsist")]
-        SerialDoesNotExsist = 19,
-        [Description("Serial already Sold")]
-        SerialAlreadySold = 20,
-        [Description("Return already completed")]
-        ReturnalreadyCompleted = 21,
-        [Description("Serial Already in use")]
-        SerialAlreadyInUse = 22,
-        [Description("Net weight not valid")]
-        NetWeightNotValid = 23,
-        [Description("SSCC serial already exsist")]
-        SSCCSerialAlreadyExsist = 24
+        UserNotAuthorized = 16
     }
 
     public enum RoleEnum

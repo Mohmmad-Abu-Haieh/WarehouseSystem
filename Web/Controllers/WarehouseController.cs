@@ -5,6 +5,7 @@ using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -17,17 +18,19 @@ namespace Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IWarehouseService _warehouseService;
+        private readonly ILogger<WarehouseController> _logger;
 
-        public WarehouseController(IConfiguration configuration, IWarehouseService warehouseService)
+
+        public WarehouseController(IConfiguration configuration, IWarehouseService warehouseService, ILogger<WarehouseController> logger)
         {
             _configuration = configuration;
             _warehouseService = warehouseService;
+            _logger = logger;
+
         }
-        // POST: api/User
         [HttpPost]
         public async Task<IActionResult> CreateWarehous([FromBody] WarehousForm form)
         {
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.ValidationState);
 
@@ -40,28 +43,26 @@ namespace Web.Controllers
             var user = await _warehouseService.GetWarehouseDetails(id);
             return user == null ? NotFound() : Ok(user);
         }
-        // PUT: api/User/update
         [HttpPut]
         public async Task<IActionResult> UpdateWarehouse([FromBody] WarehousForm form)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.ValidationState);
             var result = await _warehouseService.UpdateWarehouse(form);
             return Ok(result);
         }
-        // GET: api/User/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWarehouseById(Guid id)
         {
             var user = await _warehouseService.GetWarehouseById(id);
             return user == null ? NotFound() : Ok(user);
         }
-        // GET: api/User/username/{username}
-        [HttpGet("username/{username}")]
+        [HttpGet("{username}")]
         public async Task<IActionResult> GetWarehouseByCode(string code)
         {
             var user = await _warehouseService.GetWarehouseByCode(code);
             return user == null ? NotFound() : Ok(user);
         }
-        // POST: api/User/filter
         [HttpPost]
         public async Task<IActionResult> GetWarehouseDataTable([FromBody] WarehouseFilter filter)
         {

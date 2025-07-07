@@ -28,50 +28,50 @@ namespace Web.Controllers
             _sessionProvider = sessionProvider;
             _logger = logger;
         }
-        // POST: api/User
         [HttpPost]
         public async Task<IActionResult> CreateAccount([FromBody] UserForm form)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.ValidationState);
+
             _logger.LogInformation("CreateAccount");
             var result = await _userService.CreateAccount(form, _sessionProvider.CurrentUser.FullName);
             return Ok(result);
         }
-        // PUT: api/User/update
         [HttpPut]
         public async Task<IActionResult> UpdateAccount([FromBody] UserForm form)
         {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.ValidationState); 
+
             var result = await _userService.UpdateAccount(form);
             return Ok(result);
         }
-        // GET: api/User/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
             var user = await _userService.GetUserById(id);
             return user == null ? NotFound() : Ok(user);
         }
-        // GET: api/User/username/{username}
-        [HttpGet("username/{username}")]
+        [HttpGet("{username}")]
         public async Task<IActionResult> GetUserByUsername(string username)
         {
             var user = await _userService.GetUserByUsername(username);
             return user == null ? NotFound() : Ok(user);
         }
-        // GET: api/User/username/{username}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserDetails(Guid id)
         {
             var user = await _userService.GetUserDetails(id);
             return user == null ? NotFound() : Ok(user);
         }
-        // POST: api/User/filter
         [HttpPost]
         public async Task<IActionResult> GetUsersDataTable([FromBody] UserFilter filter)
         {
             var result = await _userService.GetUsersDataTable(filter);
             return Ok(result);
         }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
@@ -84,14 +84,12 @@ namespace Web.Controllers
                 throw new Exception(ex.Message);
             }
         }
-
         [HttpGet]
         public async Task<IActionResult> GetUsersFormData()
         {
             var data = await _userService.GetUsersFormData();
             return Ok(data);
         }
-
         [HttpPost]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePassword model)
         {

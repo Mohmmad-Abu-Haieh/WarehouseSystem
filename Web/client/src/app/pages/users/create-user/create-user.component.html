@@ -25,7 +25,7 @@
       <div *ngIf="!userId">
       <div class="mb-3">
         <label>Password</label>
-        <input type="password" class="form-control" name="password" #password="ngModel"
+        <input type="password" class="form-control" name="password"  minlength="6" #password="ngModel"
         [(ngModel)]="model.password" required />
       </div>
       <div *ngIf="password.invalid && password.touched" class="text-danger mt-1 ms-1">

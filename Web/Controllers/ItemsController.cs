@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -18,11 +19,13 @@ namespace Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IItemService _itemService;
+        private readonly ILogger<ItemsController> _logger;
 
-        public ItemsController(IConfiguration configuration, IItemService itemService)
+        public ItemsController(IConfiguration configuration, IItemService itemService, ILogger<ItemsController> logger)
         {
             _configuration = configuration;
             _itemService = itemService;
+            _logger = logger;
         }
         [HttpPost]
         public async Task<IActionResult> GetItemsDataTable([FromBody] ItemFilter filter)
@@ -30,7 +33,6 @@ namespace Web.Controllers
             var result = await _itemService.GetItemsDataTable(filter);
             return Ok(result);
         }
-        // POST: api/User
         [HttpPost]
         public async Task<IActionResult> CreateItems([FromBody] ItemForm form)
         {
@@ -38,6 +40,14 @@ namespace Web.Controllers
                 return BadRequest(ModelState.ValidationState);
 
             var result = await _itemService.CreateItems(form);
+            return Ok(result);
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateItem([FromBody] ItemForm form)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.ValidationState);
+            var result = await _itemService.UpdateItem(form);
             return Ok(result);
         }
         [HttpGet]
@@ -51,12 +61,6 @@ namespace Web.Controllers
         {
             var user = await _itemService.GetItemDetails(id);
             return user == null ? NotFound() : Ok(user);
-        }
-        [HttpPut]
-        public async Task<IActionResult> UpdateItem([FromBody] ItemForm form)
-        {
-            var result = await _itemService.UpdateItem(form);
-            return Ok(result);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItem(Guid id)
