@@ -10,51 +10,77 @@ import { ItemsService } from '../items.service';
   styleUrls: ['./create-item.component.css']
 })
 export class CreateItemComponent implements OnInit, OnDestroy {
-  roles : any[] = [];
-  userId: any;
+  warehouses : any[] = [];
+  itemId: any;
   public model: any = {
-        id: null,
-        fullName: '',
-        email: '',
-        mobile: '',
-        password: '',
-        roleId: null
-    };
+      id: null,
+      itemName: '',        
+      skuCode: '',         
+      qty: 0,              
+      costPrice: 0,        
+      msrpPrice: 0,        
+      warehouseId: null    
+  };
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CreateItemComponent>, 
     public itemsService: ItemsService
     ) {
-          this.userId = data.rowId;
+          this.itemId = data.rowId;
           this.itemsService.GetItemsFormData().then((res: any) => {
-            debugger;
-            this.roles = res;
+            this.warehouses = res;
           }).catch((err) => {
             console.error('Failed to load form data', err);
           });
       }
   ngOnInit(): void {
-    if (this.userId) {
-      this.loadUserForEdit(this.userId);  
+    if (this.itemId) {
+      this.loadItemForEdit(this.itemId);  
     }
   }
-  onSubmitItem(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-    this.itemsService.CreateItem(this.model).then((success: any) => {
+  // onSubmitItem(form: NgForm) {
+  //   if (form.invalid) {
+  //     return;
+  //   }
+  //   this.itemsService.CreateItem(this.model).then((success: any) => {
+  //     if (success) {
+  //       alert("Item create successfully");
+  //     } else {
+  //       alert("Failed to create item");
+  //     }
+  //   });
+  //   this.dialogRef.close(true);
+  // }
+
+onSubmitItem(form: NgForm) {
+  if (form.invalid) {
+    return;
+  }
+  const isUpdate = !!this.itemId;
+  if (isUpdate) {
+    this.itemsService.UpdateItem(this.model).then((success: any) => {
       if (success) {
+        alert("Item updated successfully");
       } else {
-        alert("فشل تسجيل الدخول");
-        localStorage.clear();
+        alert("Failed to update item");
       }
     });
-    console.log('User created:', this.model);
-    this.dialogRef.close(this.model);
+  } else {
+    this.itemsService.CreateItem(this.model).then((success: any) => {
+      if (success) {
+        alert("Item created successfully");
+      } else {
+        alert("Failed to create item");
+      }
+    });
   }
-  loadUserForEdit(userId: number) {
-  this.itemsService.GetItemDetails(userId).then((res: any) => {
-    debugger;
+  this.dialogRef.close(true);
+}
+
+
+
+  loadItemForEdit(itemId: number) {
+  this.itemsService.GetItemDetails(itemId).then((res: any) => {
     this.model = res;
   }).catch((err) => {
     console.error('Failed to load user', err);
@@ -63,11 +89,12 @@ export class CreateItemComponent implements OnInit, OnDestroy {
 ngOnDestroy(): void {
   this.model = {
       id: null,
-      fullName: '',
-      email: '',
-      mobile: '',
-      password: '',
-      roleId: null
+      fullName: '',        
+      skuCode: '',         
+      qty: 0,              
+      costPrice: 0,        
+      msrpPrice: 0,        
+      warehouseId: null 
   };
 }
 }

@@ -4,15 +4,13 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class ItemsService {
-constructor(public http: HttpClient) {
-}
+constructor(public http: HttpClient) {}
 GetAllItems(model: any) {
   return new Promise((resolve, reject) => {
-    this.http.post('User/GetUsersDataTable', model)
+    this.http.post('Items/GetItemsDataTable', model)
       .subscribe({
         next: (response: any) => {
-          const user = response;
-          if (user) {
+          if (response) {
             resolve(response);
           } else {
             resolve(false);
@@ -25,13 +23,12 @@ GetAllItems(model: any) {
   });
 }
 CreateItem(model: any) {
-  debugger;
   return new Promise((resolve, reject) => {
-    this.http.post('User/CreateAccount', model)
+    this.http.post('Items/CreateItems', model)
       .subscribe({
         next: (response: any) => {
-          const user = response;
-          if (user) {
+          const res = response;
+          if (res.isSuccessfull) {
             resolve(true);
           } else {
             resolve(false);
@@ -44,14 +41,13 @@ CreateItem(model: any) {
   });
 }
 GetItemDetails(id: any) {
-  debugger;
   return new Promise((resolve, reject) => {
-    this.http.get('User/GetUserDetails/' + id)
+    this.http.get('Items/GetItemDetails/' + id)
       .subscribe({
         next: (response: any) => {
-          const user = response.result;
-          if (user) {
-            resolve(user);
+          const item = response.result;
+          if (item) {
+            resolve(item);
           } else {
             resolve(false);
           }
@@ -63,12 +59,11 @@ GetItemDetails(id: any) {
   });
 }
 GetItemsFormData() {
-  debugger;
   return new Promise((resolve, reject) => {
-    this.http.get('User/GetUsersFormData')
+    this.http.get('Items/GetItemsFormData')
       .subscribe({
         next: (response: any) => {
-          const data = response.roles;
+          const data = response.warehouses;
           if (data) {
             resolve(data);
           } else {
@@ -81,15 +76,48 @@ GetItemsFormData() {
       });
   });
 }
-RemoveItem(id: any) {
-  debugger;
+// RemoveItem(id: any) {
+//   return new Promise((resolve, reject) => {
+//     this.http.delete('Items/DeleteUser/' + id)
+//       .subscribe({
+//         next: (response: any) => {
+//           const user = response.result;
+//           if (user) {
+//             resolve(user);
+//           } else {
+//             resolve(false);
+//           }
+//         },
+//         error: () => {
+//           resolve(false);       
+//         }
+//       });
+//   });
+// }
+UpdateItem(model: any) {
   return new Promise((resolve, reject) => {
-    this.http.delete('User/DeleteUser/' + id)
+    this.http.put('Items/UpdateItem', model)
       .subscribe({
         next: (response: any) => {
-          const user = response.result;
-          if (user) {
-            resolve(user);
+          if (response.isSuccessfull) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        error: () => {
+          resolve(false);
+        }
+      });
+  });
+}
+RemoveItem(id: any) {
+  return new Promise((resolve, reject) => {
+    this.http.delete('Items/DeleteItem/' + id)
+      .subscribe({
+        next: (response: any) => {
+          if (response.isSuccessfull) {
+            resolve(true);
           } else {
             resolve(false);
           }

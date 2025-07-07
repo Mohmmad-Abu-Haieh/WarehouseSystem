@@ -194,7 +194,6 @@ app.UseSpa(spa =>
 
     //if (app.Environment.IsDevelopment())
     //{
-    //    // استخدم البروكسي إلى خادم Angular بدل UseAngularCliServer
     //    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
     //}
 });

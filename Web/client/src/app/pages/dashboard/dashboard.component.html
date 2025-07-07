@@ -1,77 +1,81 @@
-<div id="content-top">
-  <div class="content-wrap">
-    <div class="row">
-    </div>
-  </div>
-</div>
+<nav aria-label="breadcrumb" class="px-4 py-2">
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/pages/home">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Dashboard
+    </li>
+  </ol>
+</nav>
 <div class="container py-4">
-  <h2 class="mb-4">Warehouse Inventory Overview</h2>
+  <h2 class="mb-4 text-center">Warehouse Inventory Overview</h2>
 
-  <!-- الرسم البياني -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <div style="max-width: 700px; margin: auto;">
-        <canvas baseChart
-          [data]="barChartData"
-          [options]="barChartOptions"
-          [type]="barChartType"
-          height="300">
-        </canvas>
+  <div class="row mb-4">
+    <div class="col-md-6 mb-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-success text-white text-center">
+          🔼 Top 10 High Quantity Items
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Item Name</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dashboardService.topHighItems">
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-danger text-white text-center">
+          🔽 Top 10 Low Quantity Items
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Item Name</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dashboardService.topLowItems">
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- أعلى وأقل 10 عناصر -->
   <div class="row">
-    <!-- أعلى -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header bg-success text-white">
-          Top 10 High Quantity Items
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+          📊 Stock Overview Chart
         </div>
-        <div class="card-body p-0">
-          <table class="table table-striped m-0">
-            <thead>
-              <tr>
-                <th>Item Name</th>
-                <th>Qty</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of this.dashboardService.topHighItems">
-                <td>{{ item.itemName }}</td>
-                <td>{{ item.quantity }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- أقل -->
-    <div class="col-md-6 mt-4 mt-md-0">
-      <div class="card">
-        <div class="card-header bg-danger text-white">
-          Top 10 Low Quantity Items
-        </div>
-        <div class="card-body p-0">
-          <table class="table table-striped m-0">
-            <thead>
-              <tr>
-                <th>Item Name</th>
-                <th>Qty</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of this.dashboardService.topLowItems">
-                <td>{{ item.itemName }}</td>
-                <td>{{ item.quantity }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="card-body">
+          <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="barChartType"
+            height="300">
+          </canvas>
         </div>
       </div>
     </div>
   </div>
 </div>
-

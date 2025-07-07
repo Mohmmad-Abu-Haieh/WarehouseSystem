@@ -42,7 +42,6 @@ GetWarehouseItems(model: any) {
   });
 }
 CreateWarehouse(model: any) {
-  debugger;
   return new Promise((resolve, reject) => {
     this.http.post('Warehouse/CreateWarehous', model)
       .subscribe({
@@ -60,7 +59,6 @@ CreateWarehouse(model: any) {
   });
 }
 UpdateWarehouse(model: any) {
-  debugger;
   return new Promise((resolve, reject) => {
     this.http.put('Warehouse/UpdateWarehouse', model)
       .subscribe({
@@ -78,7 +76,6 @@ UpdateWarehouse(model: any) {
   });
 }
 GetWarehouseDetails(id: any) {
-  debugger;
   return new Promise((resolve, reject) => {
     this.http.get('Warehouse/GetWarehouseDetails/' + id)
       .subscribe({
@@ -97,7 +94,6 @@ GetWarehouseDetails(id: any) {
   });
 }
 GetWarehousesFormData() {
-  debugger;
   return new Promise((resolve, reject) => {
     this.http.get('Warehouse/GetWarehouseFormData')
       .subscribe({
@@ -116,7 +112,6 @@ GetWarehousesFormData() {
   });
 }
 RemoveWarehouse(id: any) {
-  debugger;
   return new Promise((resolve, reject) => {
     this.http.delete('Warehouse/DeleteWarehouse/' + id)
       .subscribe({

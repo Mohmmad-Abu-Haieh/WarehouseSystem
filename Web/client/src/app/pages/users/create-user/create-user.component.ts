@@ -25,7 +25,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     ) {
           this.userId = data.rowId;
           this.usersService.GetUsersFormData().then((res: any) => {
-            debugger;
             this.roles = res;
           }).catch((err) => {
             console.error('Failed to load form data', err);
@@ -60,7 +59,6 @@ onSubmitUser(form: NgForm) {
       if (success) {
         alert("User updated successfully");
     setTimeout(() => {
-      debugger;
       location.reload();
     }, 100);
       } else {
@@ -80,7 +78,6 @@ onSubmitUser(form: NgForm) {
 }
   loadUserForEdit(userId: number) {
   this.usersService.GetUserDetails(userId).then((res: any) => {
-    debugger;
     this.model = res;
   }).catch((err) => {
     console.error('Failed to load user', err);

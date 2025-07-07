@@ -1,5 +1,7 @@
-﻿using Domain.DTO.Warehous;
+﻿using Domain.DTO.Item;
+using Domain.DTO.Warehous;
 using Domain.Interface;
+using Domain.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,72 +17,53 @@ namespace Web.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IWarehouseService _warehouseService;
+        private readonly IItemService _itemService;
 
-        public ItemsController(IConfiguration configuration, IWarehouseService warehouseService)
+        public ItemsController(IConfiguration configuration, IItemService itemService)
         {
             _configuration = configuration;
-            _warehouseService = warehouseService;
+            _itemService = itemService;
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetItemsDataTable([FromBody] ItemFilter filter)
+        {
+            var result = await _itemService.GetItemsDataTable(filter);
+            return Ok(result);
         }
         // POST: api/User
         [HttpPost]
-        public async Task<IActionResult> CreateWarehous([FromBody] WarehousForm form)
+        public async Task<IActionResult> CreateItems([FromBody] ItemForm form)
         {
-            var result = await _warehouseService.CreateWarehous(form);
-            return Ok(result);
-        }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetWarehouseDetails(Guid id)
-        {
-            var user = await _warehouseService.GetWarehouseDetails(id);
-            return user == null ? NotFound() : Ok(user);
-        }
-        // PUT: api/User/update
-        [HttpPut]
-        public async Task<IActionResult> UpdateWarehouse([FromBody] WarehousForm form)
-        {
-            var result = await _warehouseService.UpdateWarehouse(form);
-            return Ok(result);
-        }
-        // GET: api/User/{id}
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetWarehouseById(Guid id)
-        {
-            var user = await _warehouseService.GetWarehouseById(id);
-            return user == null ? NotFound() : Ok(user);
-        }
-        // GET: api/User/username/{username}
-        [HttpGet("username/{username}")]
-        public async Task<IActionResult> GetWarehouseByCode(string code)
-        {
-            var user = await _warehouseService.GetWarehouseByCode(code);
-            return user == null ? NotFound() : Ok(user);
-        }
-        // POST: api/User/filter
-        [HttpPost]
-        public async Task<IActionResult> GetWarehouseDataTable([FromBody] WarehouseFilter filter)
-        {
-            var result = await _warehouseService.GetWarehouseDataTable(filter);
-            return Ok(result);
-        }
-        [HttpPost]
-        public async Task<IActionResult> GetWarehouseItemsDataTable([FromBody] WarehouseFilter filter)
-        {
-            var result = await _warehouseService.GetWarehouseItemsDataTable(filter);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.ValidationState);
+
+            var result = await _itemService.CreateItems(form);
             return Ok(result);
         }
         [HttpGet]
-        public async Task<IActionResult> GetWarehouseFormData()
+        public async Task<IActionResult> GetItemsFormData()
         {
-            var data = await _warehouseService.GetWarehouseFormData();
+            var data = await _itemService.GetItemsFormData();
             return Ok(data);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetItemDetails(Guid id)
+        {
+            var user = await _itemService.GetItemDetails(id);
+            return user == null ? NotFound() : Ok(user);
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateItem([FromBody] ItemForm form)
+        {
+            var result = await _itemService.UpdateItem(form);
+            return Ok(result);
+        }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWarehouse(Guid id)
+        public async Task<IActionResult> DeleteItem(Guid id)
         {
             try
             {
-                return Ok(await _warehouseService.DeleteWarehouse(id));
+                return Ok(await _itemService.DeleteItem(id));
             }
             catch (Exception ex)
             {

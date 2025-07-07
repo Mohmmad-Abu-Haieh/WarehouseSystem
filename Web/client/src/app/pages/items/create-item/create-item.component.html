@@ -1,58 +1,104 @@
-        
 <div class="px-4 py-3">
-<form #createItemForm="ngForm" (ngSubmit)="onSubmitItem(createItemForm)">
-  <div class="dialog-content px-4 py-3">
-
-    <div class="mb-3">
-      <label>Full Name</label>
-      <input type="text"
-             class="form-control"
-             name="fullName"
-             [(ngModel)]="model.fullName"
-             required />
+  <form #createItemForm="ngForm" (ngSubmit)="onSubmitItem(createItemForm)">
+    <div class="dialog-content px-4 py-3">
+      <!-- Item Name -->
+      <div class="mb-3">
+        <label>Item Name</label>
+        <input type="text"
+               class="form-control"
+               name="itemName"
+               [(ngModel)]="model.itemName"
+               required
+               #itemName="ngModel" />
+        <div *ngIf="itemName.invalid && itemName.touched" class="text-danger mt-1 ms-1">
+          <div *ngIf="itemName.errors?.['required']">Item Name is required.</div>
+        </div>
+      </div>
+      <!-- SkuCode -->
+      <div class="mb-3">
+        <label>SkuCode</label>
+        <input type="text"
+               class="form-control"
+               name="skuCode"
+               [(ngModel)]="model.skuCode"
+               required
+               #skuCode="ngModel" />
+        <div *ngIf="skuCode.invalid && skuCode.touched" class="text-danger mt-1 ms-1">
+          <div *ngIf="skuCode.errors?.['required']">SkuCode is required.</div>
+        </div>
+      </div>
+      <!-- Qty -->
+      <div class="mb-3">
+        <label>Qty</label>
+        <input type="number"
+               class="form-control"
+               name="qty"
+               [(ngModel)]="model.qty"
+               required
+               min="0"
+               #qty="ngModel" />
+        <div *ngIf="qty.invalid && qty.touched" class="text-danger mt-1 ms-1">
+          <div *ngIf="qty.errors?.['required']">Quantity is required.</div>
+          <div *ngIf="qty.errors?.['min']">Quantity cannot be negative.</div>
+        </div>
+      </div>
+      <!-- CostPrice -->
+      <div class="mb-3">
+        <label>Cost Price</label>
+        <input type="number"
+               class="form-control"
+               name="costPrice"
+               [(ngModel)]="model.costPrice"
+               required
+               min="0"
+               step="0.01"
+               #costPrice="ngModel" />
+        <div *ngIf="costPrice.invalid && costPrice.touched" class="text-danger mt-1 ms-1">
+          <div *ngIf="costPrice.errors?.['required']">Cost Price is required.</div>
+          <div *ngIf="costPrice.errors?.['min']">Cost Price cannot be negative.</div>
+        </div>
+      </div>
+      <!-- MsrpPrice -->
+      <div class="mb-3">
+        <label>Msrp Price</label>
+        <input type="number"
+               class="form-control"
+               name="msrpPrice"
+               [(ngModel)]="model.msrpPrice"
+               required
+               min="0"
+               step="0.01"
+               #msrpPrice="ngModel" />
+        <div *ngIf="msrpPrice.invalid && msrpPrice.touched" class="text-danger mt-1 ms-1">
+          <div *ngIf="msrpPrice.errors?.['required']">Msrp Price is required.</div>
+          <div *ngIf="msrpPrice.errors?.['min']">Msrp Price cannot be negative.</div>
+        </div>
+      </div>
+      <!-- Warehouse Select -->
+      <div class="mb-3">
+        <label for="warehouse" class="form-label">Warehouses</label>
+        <select class="form-select"
+                id="warehouse"
+                name="warehouseId"
+                [(ngModel)]="model.warehouseId"
+                required
+                #warehouseId="ngModel">
+          <option value="" disabled selected>Select Warehouse</option>
+          <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+            {{ warehouse.text }}
+          </option>
+        </select>
+        <div *ngIf="warehouseId.invalid && warehouseId.touched" class="text-danger mt-1 ms-1">
+          <div *ngIf="warehouseId.errors?.['required']">Warehouse is required.</div>
+        </div>
+      </div>
+      <!-- Submit -->
+      <div *ngIf="!itemId" class="d-grid mb-2">
+        <button type="submit" class="btn btn-primary" [disabled]="createItemForm.invalid">Create</button>
+      </div>
+      <div *ngIf="itemId" class="d-grid mb-2">
+        <button type="submit" class="btn btn-primary" [disabled]="createItemForm.invalid">Update</button>
+      </div>
     </div>
-
-    <div class="mb-3">
-      <label>Email</label>
-      <input type="email"
-             class="form-control"
-             name="email"
-             [(ngModel)]="model.email"
-             required />
-    </div>
-
-    <div class="mb-3">
-      <label>Mobile</label>
-      <input type="text"
-             class="form-control"
-             name="mobile"
-             [(ngModel)]="model.mobile" />
-    </div>
-
-    <div class="mb-3">
-      <label>Password</label>
-      <input type="password"
-             class="form-control"
-             name="password"
-             [(ngModel)]="model.password"
-             required />
-    </div>
-<div class="mb-3">
-  <label for="role" class="form-label">Role</label>
-  <select class="form-select"
-          id="role"
-          name="roleId"
-          [(ngModel)]="model.roleId"
-          required>
-    <option value="" disabled selected>Select Role</option>
-    <option *ngFor="let role of roles" [value]="role.id">
-      {{ role.text }}
-    </option>
-  </select>
-</div>
-<div class="d-grid mb-2">
-      <button type="submit" class="btn btn-primary" [disabled]="createItemForm.invalid">Create</button>
-</div>
- </div>
-</form>
+  </form>
 </div>

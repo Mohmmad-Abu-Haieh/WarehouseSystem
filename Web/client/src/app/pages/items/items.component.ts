@@ -9,8 +9,7 @@ declare var $: any;
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: [
-    "./items.component.scss"
-  ]
+    "./items.component.scss"]
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 dataOfTable = {
@@ -25,20 +24,19 @@ dataOfTable = {
     public itemsService: ItemsService,public dialog: MatDialog) {
   }
   ngOnInit(): void {
-  this.loadUsers();  
+  this.loadItems();  
   }
   onSearch() {
   this.dataOfTable.PageIndex = 0;
-  this.loadUsers();
+  this.loadItems();
 }
-loadUsers() {
+loadItems() {
 const filter = {
       keyword: this.dataOfTable.keyword,
       pageIndex: this.dataOfTable.PageIndex,
       pageSize: this.dataOfTable.PageSize
     };
   this.itemsService.GetAllItems(filter).then((response: any) => {
-    debugger;
     this.dataOfTable.Data = response.data;
     this.dataOfTable.DataCount = response.count;
     const pageCount = Math.ceil(this.dataOfTable.DataCount / this.dataOfTable.PageSize);
@@ -50,33 +48,39 @@ const filter = {
 changePage(newPageIndex: number) {
     if (newPageIndex < 0 || newPageIndex >= this.pagesArray.length) return;
     this.dataOfTable.PageIndex = newPageIndex;
-    this.loadUsers();
+    this.loadItems();
   }
-onOpenCreateUserModal() {
+onOpenCreateItemModal() {
     let dialogRef: MatDialogRef<any> = this.dialog.open(CreateItemComponent, {
         disableClose: false,
         width: '80vw',
         height: '80vh',
         data: {}
     });
+  dialogRef.afterClosed().subscribe((result) => {
+    window.location.reload();
+  });
 }
-onEditUser(user: any) {
+onEditItem(item: any) {
   let dialogRef: MatDialogRef<any> = this.dialog.open(CreateItemComponent, {
       disableClose: false,
       width: '80vw',
       height: '80vh',
-      data: { rowId: user.id }
+      data: { rowId: item.id }
+  });
+    dialogRef.afterClosed().subscribe((result) => {
+    window.location.reload();
   });
 }
-onDeleteUser(user: any) {
-  if (confirm(`Are you sure you want to delete user ${user.fullName}?`)) {
-    this.itemsService.RemoveItem(user.id).then((res: any) => {
-      debugger;
-      console.log('User deleted successfully:', res);
+onDeleteItem(item: any) {
+  if (confirm(`Are you sure you want to delete item ${item.fullName}?`)) {
+    this.itemsService.RemoveItem(item.id).then((res: any) => {
+      alert('item deleted successfully');
+          window.location.reload();
     }).catch((err) => {
-      console.error('Failed to delete user', err);
+      alert('Failed to delete item');
     });
-    console.log('Delete user:', user);
+    console.log('Delete item:', item);
   }
 }
 ngOnDestroy(): void {

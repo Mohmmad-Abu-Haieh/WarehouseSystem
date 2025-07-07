@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 
@@ -7,7 +8,7 @@ import { jwtDecode, JwtPayload } from 'jwt-decode';
 export class AuthService {
   userToken: any = localStorage.getItem('token');
   decodedToken: any;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router: Router, ) {
   }
   login(model: any) {
     return new Promise((resolve, reject) => {
@@ -33,4 +34,8 @@ export class AuthService {
     this.decodedToken = jwtDecode<JwtPayload>(userToken);
     return this.decodedToken.role
   }
+    logout() {
+    localStorage.clear();
+     this.router.navigateByUrl('/login');
+   }
 }

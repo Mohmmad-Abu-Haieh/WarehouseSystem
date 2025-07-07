@@ -26,7 +26,6 @@ export class DashboardService {
     topLowItems: ItemQuantityDto[] = [];
 
     GetWarehouseStatus() {
-        debugger;
         return new Promise((resolve, reject) => {
             this.http.get('Dashboard/GetWarehouseStatus')
                 .subscribe({
@@ -46,7 +45,6 @@ export class DashboardService {
     }
 
     GetTopHighItems() {
-        debugger;
         return new Promise((resolve, reject) => {
             this.http.get('Dashboard/GetTopHighItems')
                 .subscribe({
@@ -67,7 +65,6 @@ export class DashboardService {
 
 
     GetTopLowItems() {
-        debugger;
         return new Promise((resolve, reject) => {
             this.http.get('Dashboard/GetTopLowItems')
                 .subscribe({
