@@ -28,7 +28,6 @@ dataOfTable = {
     }
   ngOnInit(): void {
   this.loadWarehouseItems();  
-
   }
   onSearch() {
   this.dataOfTable.PageIndex = 0;
@@ -42,7 +41,6 @@ const filter = {
       Id : this.warehouseId
     };
   this.warehouseService.GetWarehouseItems(filter).then((response: any) => {
-    debugger;
     this.dataOfTable.Data = response.data;
     this.dataOfTable.DataCount = response.count;
     const pageCount = Math.ceil(this.dataOfTable.DataCount / this.dataOfTable.PageSize);
@@ -57,7 +55,6 @@ changePage(newPageIndex: number) {
     this.loadWarehouseItems();
   }
 ngOnDestroy(): void {
-
   }
 }
 

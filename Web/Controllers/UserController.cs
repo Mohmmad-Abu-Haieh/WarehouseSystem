@@ -37,7 +37,7 @@ namespace Web.Controllers
             return Ok(result);
         }
         // PUT: api/User/update
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateAccount([FromBody] UserForm form)
         {
             var result = await _userService.UpdateAccount(form);
@@ -90,6 +90,17 @@ namespace Web.Controllers
         {
             var data = await _userService.GetUsersFormData();
             return Ok(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePassword model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var serviceResult = await _userService.ChangePassword(model);
+            return Ok(serviceResult);
         }
     }
 }

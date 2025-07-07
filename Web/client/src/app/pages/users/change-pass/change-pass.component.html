@@ -1,0 +1,33 @@
+<div class="px-4 py-3">
+  <form #changePasswordForm="ngForm" (ngSubmit)="onChangePassword(changePasswordForm)">
+  <div class="mb-3">
+    <label for="newPassword">New Password</label>
+    <input type="password"
+           class="form-control"
+           name="newPassword"
+           [(ngModel)]="model.newPassword"
+           required
+           #newPassword="ngModel" />
+  </div>
+
+  <div class="mb-3">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password"
+           class="form-control"
+           name="confirmPassword"
+           [(ngModel)]="model.confirmPassword"
+           required
+           #confirmPassword="ngModel" />
+    <div *ngIf="model.confirmPassword && model.newPassword !== model.confirmPassword" class="text-danger mt-1">
+      Passwords do not match.
+    </div>
+  </div>
+
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="changePasswordForm.invalid || model.newPassword !== model.confirmPassword">
+    Change Password
+  </button>
+</form>
+</div>
+

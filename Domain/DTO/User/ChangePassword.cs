@@ -4,11 +4,8 @@ namespace DTO
 {
     public class ChangePassword
     {
-        [Required]
+        public Guid Id { get; set; }
+
         public string NewPassword { get; set; }
-        [Required]
-        public string OldPassword { get; set; }
-        [Required]
-        public string ConfirmPassword { get; set; }
     }
 }

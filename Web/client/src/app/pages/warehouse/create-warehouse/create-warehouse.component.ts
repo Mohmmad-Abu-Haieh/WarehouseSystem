@@ -26,9 +26,9 @@ export class CreateWarehouseComponent implements OnInit, OnDestroy {
     ) {
           this.warehouseId = data.rowId;
           this.warehouseService.GetWarehousesFormData().then((res: any) => {
-            debugger;
             this.countries = res;
           }).catch((err : any) => {
+            alert("Internet connection error");
             console.error('Failed to load form data', err);
           });
       }
@@ -37,7 +37,6 @@ export class CreateWarehouseComponent implements OnInit, OnDestroy {
       this.loadWarehouseForEdit(this.warehouseId);  
     }
   }
-
   onSubmitWarehouse(form: NgForm) {
   if (form.invalid) {
     return;
@@ -60,29 +59,13 @@ export class CreateWarehouseComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  this.dialogRef.close(this.model); // إغلاق النافذة مع إرجاع النموذج
+  this.dialogRef.close(this.model);
 }
-
-  // onCreateWarehouse(form: NgForm) {
-  //   if (form.invalid) {
-  //     return;
-  //   }
-  //   this.warehouseService.CreateWarehouse(this.model).then((success: any) => {
-  //     debugger;
-  //     if (success) {
-  //       alert("Successfully created warehouse");
-  //     } else {
-  //       alert("Failed to create warehouse");
-  //     }
-  //   });
-  //   this.dialogRef.close(this.model);
-  // }
   loadWarehouseForEdit(warehouseId: number) {
   this.warehouseService.GetWarehouseDetails(warehouseId).then((res: any) => {
-    debugger;
     this.model = res;
   }).catch((err : any) => {
+    alert("Internet connection error");
     console.error('Failed to load warehouse', err);
   });
 }

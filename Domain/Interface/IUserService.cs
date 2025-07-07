@@ -19,6 +19,7 @@ namespace Domain.Interface
         Task<ServiceOperationResult> DeleteUser(Guid id);
         Task<ServiceOperationResult<UserForm>> GetUserDetails(Guid Id);
         Task<UserFormData> GetUsersFormData();
+        Task<ServiceOperationResult> ChangePassword(ChangePassword model);
     }
 }
 

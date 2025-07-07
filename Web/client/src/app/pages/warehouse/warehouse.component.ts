@@ -60,6 +60,10 @@ onOpenCreateWarehouseModal() {
         height: '80vh',
         data: {}
     });
+
+  dialogRef.afterClosed().subscribe((result) => {
+    window.location.reload();
+  });
 }
 onEditWarehouse(warehouse: any) {
   let dialogRef: MatDialogRef<any> = this.dialog.open(CreateWarehouseComponent, {
@@ -68,16 +72,21 @@ onEditWarehouse(warehouse: any) {
       height: '80vh',
       data: { rowId: warehouse.id }
   });
+    dialogRef.afterClosed().subscribe((result) => {
+    window.location.reload();
+  });
 }
 onDeleteWarehouse(warehouse: any) {
   if (confirm(`Are you sure you want to delete warehouse ${warehouse.name}?`)) {
     this.warehouseService.RemoveWarehouse(warehouse.id).then((res: any) => {
       debugger;
-      console.log('Warehouse deleted successfully:', res);
+      if(res){
+        this.loadWarehouses();
+      }
+      alert('Warehouse deleted successfully:');
     }).catch((err) => {
-      console.error('Failed to delete warehouse', err);
+      alert('Warehouse deleted error:');
     });
-    console.log('Delete warehouse:', warehouse);
   }
 }
 onDeleteWarehouseItems(warehouse: any) {

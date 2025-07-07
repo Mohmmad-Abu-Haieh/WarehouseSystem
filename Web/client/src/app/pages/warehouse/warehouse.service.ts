@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class WarehouseService {
-constructor(public http: HttpClient) {
-}
+constructor(public http: HttpClient) {}
 GetAllWarehouses(model: any) {
   return new Promise((resolve, reject) => {
     this.http.post('Warehouse/GetWarehouseDataTable', model)
@@ -48,7 +47,6 @@ CreateWarehouse(model: any) {
     this.http.post('Warehouse/CreateWarehous', model)
       .subscribe({
         next: (response: any) => {
-         // const warehouse = response;
           if (response.isSuccessfull) {
             resolve(true);
           } else {
@@ -61,14 +59,12 @@ CreateWarehouse(model: any) {
       });
   });
 }
-
 UpdateWarehouse(model: any) {
   debugger;
   return new Promise((resolve, reject) => {
     this.http.put('Warehouse/UpdateWarehouse', model)
       .subscribe({
         next: (response: any) => {
-         // const warehouse = response;
           if (response.isSuccessfull) {
             resolve(true);
           } else {
@@ -125,9 +121,8 @@ RemoveWarehouse(id: any) {
     this.http.delete('Warehouse/DeleteWarehouse/' + id)
       .subscribe({
         next: (response: any) => {
-          const user = response.result;
-          if (user) {
-            resolve(user);
+          if (response.isSuccessfull) {
+            resolve(true);
           } else {
             resolve(false);
           }

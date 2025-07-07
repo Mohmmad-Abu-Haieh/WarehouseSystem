@@ -1,58 +1,55 @@
-        
 <div class="px-4 py-3">
-<form #createUserForm="ngForm" (ngSubmit)="onCreateUser(createUserForm)">
-  <div class="dialog-content px-4 py-3">
-
-    <div class="mb-3">
-      <label>Full Name</label>
-      <input type="text"
-             class="form-control"
-             name="fullName"
-             [(ngModel)]="model.fullName"
-             required />
+  <form #createUserForm="ngForm" (ngSubmit)="onSubmitUser(createUserForm)">
+    <div class="dialog-content px-4 py-3">
+      <div class="mb-3">
+        <label>Full Name</label>
+        <input type="text" class="form-control" name="fullName" #fullName="ngModel"
+         [(ngModel)]="model.fullName" required />
+      </div>
+      <div *ngIf="fullName.invalid && fullName.touched" class="text-danger mt-1 ms-1">
+        <div *ngIf="fullName.errors?.['required']">Full Name is required.</div>
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" #email="ngModel"
+        [(ngModel)]="model.email" required />
+      </div>
+      <div *ngIf="email.invalid && email.touched" class="text-danger mt-1 ms-1">
+        <div *ngIf="email.errors?.['required']">Email is required.</div>
+        <div *ngIf="email.errors?.['email']">Invalid email format.</div>
+      </div>
+      <div class="mb-3">
+        <label>Mobile</label>
+        <input type="text" class="form-control" name="mobile" #mobile="ngModel" [(ngModel)]="model.mobile" />
+      </div>
+      <div *ngIf="!userId">
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password" #password="ngModel"
+        [(ngModel)]="model.password" required />
+      </div>
+      <div *ngIf="password.invalid && password.touched" class="text-danger mt-1 ms-1">
+        <div *ngIf="password.errors?.['required']">Password is required.</div>
+        <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters.</div>
+      </div>
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select class="form-select" id="role" name="roleId" 
+                #roleId="ngModel"
+                [(ngModel)]="model.roleId">
+          <option value="" disabled selected>Select Role</option>
+          <option *ngFor="let role of roles" [value]="role.id">
+            {{ role.text }}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="!userId" class="d-grid mb-2">
+        <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Create</button>
+      </div>
+       <div *ngIf="userId" class="d-grid mb-2">
+        <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Update</button>
+      </div>
     </div>
-
-    <div class="mb-3">
-      <label>Email</label>
-      <input type="email"
-             class="form-control"
-             name="email"
-             [(ngModel)]="model.email"
-             required />
-    </div>
-
-    <div class="mb-3">
-      <label>Mobile</label>
-      <input type="text"
-             class="form-control"
-             name="mobile"
-             [(ngModel)]="model.mobile" />
-    </div>
-
-    <div class="mb-3">
-      <label>Password</label>
-      <input type="password"
-             class="form-control"
-             name="password"
-             [(ngModel)]="model.password"
-             required />
-    </div>
-<div class="mb-3">
-  <label for="role" class="form-label">Role</label>
-  <select class="form-select"
-          id="role"
-          name="roleId"
-          [(ngModel)]="model.roleId"
-          required>
-    <option value="" disabled selected>Select Role</option>
-    <option *ngFor="let role of roles" [value]="role.id">
-      {{ role.text }}
-    </option>
-  </select>
-</div>
-<div class="d-grid mb-2">
-      <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Create</button>
-</div>
- </div>
-</form>
+  </form>
 </div>

@@ -22,12 +22,7 @@
     width: 90%;
     margin-left: 33px;
     height: 120px;
-    /* align-items: center; */
-    /* margin-left: 10px; */
-    /* margin-right: 10px; */
-    /* margin: 0 0px; */
     overflow: scroll;
-
 }
 
 ::ng-deep .custom-ng-select .ng-select-container {

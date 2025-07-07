@@ -11,6 +11,7 @@ GetAllUsers(model: any) {
     this.http.post('User/GetUsersDataTable', model)
       .subscribe({
         next: (response: any) => {
+          debugger;
           const user = response;
           if (user) {
             resolve(response);
@@ -30,8 +31,26 @@ CreateUser(model: any) {
     this.http.post('User/CreateAccount', model)
       .subscribe({
         next: (response: any) => {
-          const user = response;
-          if (user) {
+          //const user = response;
+          if (response.isSuccessfull) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        error: () => {
+          resolve(false);
+        }
+      });
+  });
+}
+UpdateUser(model: any) {
+  debugger;
+  return new Promise((resolve, reject) => {
+    this.http.put('User/UpdateAccount', model)
+      .subscribe({
+        next: (response: any) => {
+          if (response.isSuccessfull) {
             resolve(true);
           } else {
             resolve(false);
@@ -87,15 +106,32 @@ RemoveUser(id: any) {
     this.http.delete('User/DeleteUser/' + id)
       .subscribe({
         next: (response: any) => {
-          const user = response.result;
-          if (user) {
-            resolve(user);
+          if (response.isSuccessfull) {
+            resolve(true);
           } else {
             resolve(false);
           }
         },
         error: () => {
           resolve(false);       
+        }
+      });
+  });
+}
+ChangePassword(model: any) {
+  debugger;
+  return new Promise((resolve, reject) => {
+    this.http.post('User/ChangePassword', model)
+      .subscribe({
+        next: (response: any) => {
+          if (response.isSuccessfull) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        error: () => {
+          resolve(false);
         }
       });
   });

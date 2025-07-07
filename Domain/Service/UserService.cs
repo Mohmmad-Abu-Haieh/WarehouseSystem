@@ -3,6 +3,7 @@ using Domain.Repositories;
 using DTO;
 using Entity;
 using Entity.Context;
+using Entity.WorkContext;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
@@ -80,14 +81,7 @@ public class UserService : IUserService
         result.Result = form;
         return result;
     }
-    public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-    {
-        using (var hmac = new System.Security.Cryptography.HMACSHA512())
-        {
-            passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-        }
-    }
+
     public async Task<ServiceOperationResult<UserForm>> UpdateAccount(UserForm form)
     {
         var result = new ServiceOperationResult<UserForm>();
@@ -208,5 +202,36 @@ public class UserService : IUserService
                 }).Distinct().ToListAsync(),
         };
         return result;
+    }
+    public async Task<ServiceOperationResult> ChangePassword(ChangePassword model)
+    {
+        var result = new ServiceOperationResult();
+        result.IsSuccessfull = true;
+        var user = await _repository.GetByIdAsync(model.Id);
+        if (user == null)
+        {
+            result.IsSuccessfull = false;
+            return result;
+        }
+        if (result.IsSuccessfull)
+        {
+            byte[] passwordHash = null;
+            byte[] passwordSalt = null;
+            CreatePasswordHash(model.NewPassword, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            await _repository.SaveAsync();
+        }
+        return result;
+    }
+    public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+    {
+        using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        {
+            passwordSalt = hmac.Key;
+            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+        }
     }
 }

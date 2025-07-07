@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { CreateUserComponent } from './create-user/create-user.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ChangepassComponent } from './change-pass/change-pass.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   declarations: [
     UsersComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ChangepassComponent
   ],
   providers: [UsersService]
 })
