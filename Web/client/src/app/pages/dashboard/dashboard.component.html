@@ -10,7 +10,6 @@
 </nav>
 <div class="container py-4">
   <h2 class="mb-4 text-center">Warehouse Inventory Overview</h2>
-
   <div class="row mb-4">
     <div class="col-md-6 mb-3">
       <div class="card shadow-sm h-100">
@@ -60,22 +59,21 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-12">
-      <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white text-center">
-          📊 Stock Overview Chart
-        </div>
-        <div class="card-body">
-          <canvas baseChart
-            [data]="barChartData"
-            [options]="barChartOptions"
-            [type]="barChartType"
-            height="300">
-          </canvas>
-        </div>
+<div class="row">
+  <div class="col-12">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white text-center">
+        📊 Stock Overview Chart
+      </div>
+      <div class="card-body py-4 px-3"> 
+        <canvas baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [type]="barChartType"
+          height="180">
+        </canvas>
       </div>
     </div>
   </div>
+</div>
 </div>

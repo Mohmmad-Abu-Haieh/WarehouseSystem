@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         };
       }
     });
-
     this.dashboardService.GetTopHighItems().then((items: any) => {
       if (items) {
         this.dashboardService.topHighItems = items;
@@ -50,7 +49,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   ngOnInit(): void {
     console.log("Dashboard initialized");
   }
@@ -59,7 +57,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     console.log("Dashboard destroyed");
   }
 
-  // إعدادات الشارت
   barChartOptions: ChartOptions = {
     responsive: true,
     plugins: {
@@ -71,37 +68,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   };
 
   barChartType: ChartType = 'bar';
-
-
-
-  // أعلى 10 عناصر من حيث الكمية
-  // topHighItems = [
-  //   { itemName: 'Paper Rolls', qty: 500 },
-  //   { itemName: 'USB-C Cables', qty: 420 },
-  //   { itemName: 'Notebooks', qty: 380 },
-  //   { itemName: 'Pens', qty: 340 },
-  //   { itemName: 'Markers', qty: 320 },
-  //   { itemName: 'Toners', qty: 300 },
-  //   { itemName: 'Cables', qty: 280 },
-  //   { itemName: 'Mouse', qty: 250 },
-  //   { itemName: 'Keyboards', qty: 240 },
-  //   { itemName: 'Folders', qty: 230 },
-  // ];
   topHighItems = this.dashboardService.topHighItems;
   topLowItems = this.dashboardService.topLowItems;
-  // أدنى 10 عناصر من حيث الكمية
-  // topLowItems = [
-  //   { itemName: 'Mouse Pads', qty: 2 },
-  //   { itemName: 'HDMI Adapters', qty: 5 },
-  //   { itemName: 'Ethernet Cables', qty: 7 },
-  //   { itemName: 'USB Drives', qty: 8 },
-  //   { itemName: 'Laminators', qty: 10 },
-  //   { itemName: 'Binders', qty: 12 },
-  //   { itemName: 'Scissors', qty: 14 },
-  //   { itemName: 'Stamps', qty: 15 },
-  //   { itemName: 'Folders A4', qty: 16 },
-  //   { itemName: 'Staplers', qty: 17 },
-  // ];
+
 }
 export interface WarehouseStatusDto {
   warehouseName: string;
