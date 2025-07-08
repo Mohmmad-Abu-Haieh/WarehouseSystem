@@ -138,7 +138,6 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
-        // زرع البيانات فقط إذا كانت الجداول فارغة
         if (!dbContext.Roles.Any())
             SeedRole.Seed(dbContext);
 

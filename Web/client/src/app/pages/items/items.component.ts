@@ -14,7 +14,7 @@ declare var $: any;
 export class ItemsComponent implements OnInit, OnDestroy {
 dataOfTable = {
     Data: [] as any[],
-    PageSize: 2,
+    PageSize: 10,
     PageIndex: 0,
     keyword: '',
     DataCount: 0

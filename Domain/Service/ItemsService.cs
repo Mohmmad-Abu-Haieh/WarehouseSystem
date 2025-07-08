@@ -84,8 +84,10 @@ namespace Domain.Service
                     CreatedOn = DateTime.UtcNow,
                     Active = true,
                 };
-                _context.WarehouseItems.Add(item);
-                await _context.SaveChangesAsync();
+
+                await _repository.AddAsync(item);
+                await _repository.SaveAsync();
+
                 form.Id = item.Id;
                 return result;
             }
@@ -142,7 +144,8 @@ namespace Domain.Service
             var result = new ServiceOperationResult();
             result.IsSuccessfull = true;
 
-            var item = await _context.WarehouseItems.FindAsync(form.Id);
+            var item = await _repository.GetByIdAsync(form.Id.Value);
+
             if (item == null)
             {
                 result.IsSuccessfull = false;
@@ -164,10 +167,10 @@ namespace Domain.Service
             item.WarehouseId = item.WarehouseId;
             item.ModifiedBy = "System";
             item.ModifiedOn = DateTime.UtcNow;
-            await _context.SaveChangesAsync();
+            await _repository.SaveAsync();
+
             return result;
         }
-
         public async Task<ServiceOperationResult> DeleteItem(Guid id)
         {
             var result = new ServiceOperationResult();

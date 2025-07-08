@@ -2,17 +2,10 @@
 using Domain.DTO.Warehous;
 using Domain.Interface;
 using Domain.Repositories;
-using DTO;
-using Entity;
 using Entity.Context;
 using Entity.Entity;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Service
 {
@@ -52,8 +45,8 @@ namespace Domain.Service
                     CreatedOn = DateTime.UtcNow,
                     Active = true,
                 };
-                _context.Warehouses.Add(warehouse);
-                await _context.SaveChangesAsync();
+                await _repository.AddAsync(warehouse);
+                await _repository.SaveAsync();
                 form.Id = warehouse.Id;
                 result.Result = form;
                 return result;
@@ -192,8 +185,7 @@ namespace Domain.Service
         {
             var result = new ServiceOperationResult<WarehousForm>();
             result.IsSuccessfull = true;
-
-            var warehouse = await _context.Warehouses.FindAsync(form.Id);
+            var warehouse = await _repository.GetByIdAsync(form.Id.Value);
             if (warehouse == null)
             {
                 result.IsSuccessfull = false;
@@ -214,7 +206,7 @@ namespace Domain.Service
             warehouse.ModifiedBy = "System";
             warehouse.ModifiedOn = DateTime.UtcNow;
 
-            await _context.SaveChangesAsync();
+            await _repository.SaveAsync();
 
             result.Result = form;
             return result;

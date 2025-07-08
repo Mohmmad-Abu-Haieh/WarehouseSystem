@@ -21,9 +21,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     keyword: '',
     DataCount: 0
   };
+  currentUserRole: string;
   pagesArray: number[] = [];
   constructor(public authService: AuthService,
     public usersService: UsersService, public dialog: MatDialog) {
+      debugger;
+          this.currentUserRole = authService.GetUserRole();
+
   }
   ngOnInit(): void {
     this.loadUsers();
@@ -82,8 +86,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   ChangePassword(user: any) {
     let dialogRef: MatDialogRef<any> = this.dialog.open(ChangepassComponent, {
       disableClose: false,
-      width: '80vw',
-      height: '80vh',
+  width: 'auto',
+  height: 'auto',
       data: { rowId: user.id }
     });
     dialogRef.afterClosed().subscribe((result) => {

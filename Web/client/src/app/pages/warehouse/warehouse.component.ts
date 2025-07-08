@@ -16,7 +16,7 @@ declare var $: any;
 export class WarehouseComponent implements OnInit, OnDestroy {
   dataOfTable = {
     Data: [] as any[],
-    PageSize: 2,
+    PageSize: 10,
     PageIndex: 0,
     keyword: '',
     DataCount: 0

@@ -45,7 +45,7 @@
         <button class="btn btn-sm btn-warning me-1" (click)="onEditUser(user)">
           <i class="fa fa-edit"></i> Edit
         </button>
-        <button class="btn btn-sm btn-danger me-1" (click)="onDeleteUser(user)">
+        <button *ngIf="user.roleName !== 'Administrator'" class="btn btn-sm btn-danger me-1" (click)="onDeleteUser(user)">
           <i class="fa fa-trash"></i> Delete
         </button>
         <button class="btn btn-sm btn-secondary" (click)="ChangePassword(user)">
