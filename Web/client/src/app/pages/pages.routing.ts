@@ -26,8 +26,8 @@ const pageRoutes: Routes = [
         loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)
       },
       {
-        path: 'logs',
-        loadChildren: () => import('./logs/logs.module').then(m => m.LogsModule)
+        path: 'serilog',
+        loadChildren: () => import('./serilog/serilog.module').then(m => m.LogsModule)
       },
       {
         path: 'home',
