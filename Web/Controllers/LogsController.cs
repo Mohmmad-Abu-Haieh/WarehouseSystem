@@ -1,4 +1,4 @@
-﻿using Domain.DTO.Logs;
+﻿using Domain.DTO.Serilog;
 using Domain.Interface;
 using Entity.WorkContext;
 using Microsoft.AspNetCore.Authorization;

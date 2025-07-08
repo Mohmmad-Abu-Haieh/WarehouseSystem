@@ -1,4 +1,4 @@
-﻿using Domain.DTO.Logs;
+﻿using Domain.DTO.Serilog;
 using DTO;
 using SharedKernel;
 using System;

@@ -105,7 +105,6 @@ builder.Services.AddSwaggerGen(c =>
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
     });
-
     c.AddSecurityRequirement(new OpenApiSecurityRequirement{
                         {
                             new OpenApiSecurityScheme{
@@ -119,7 +118,6 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 #endregion
-
 builder.Services.AddSpaStaticFiles(configuration =>
 {
     configuration.RootPath = "client/dist/client/browser";

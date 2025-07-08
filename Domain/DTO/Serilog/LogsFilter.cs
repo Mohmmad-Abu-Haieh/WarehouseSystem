@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DTO.Logs
+namespace Domain.DTO.Serilog
 {
     public class LogsFilter
     {

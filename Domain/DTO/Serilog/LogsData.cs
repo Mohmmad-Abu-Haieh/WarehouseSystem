@@ -1,4 +1,4 @@
-﻿namespace Domain.DTO.Logs
+﻿namespace Domain.DTO.Serilog
 {
     public class LogsData
     {
